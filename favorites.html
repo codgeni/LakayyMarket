@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Favoris — LakayMarket</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+</head>
+<body class="bg-[#FAFAFA] text-slate-900 min-h-screen">
+    <main class="max-w-4xl mx-auto p-6">
+        <h1 class="text-2xl font-semibold mb-4">Vos favoris</h1>
+        <div id="message" class="text-sm text-slate-600 mb-4"></div>
+        <div id="favList" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
+        <div class="mt-6">
+            <a href="index.html" class="text-blue-600 hover:underline">Retour au catalogue</a>
+        </div>
+    </main>
+
+    <script>
+        (function(){
+            function getCurrentUser(){
+                return JSON.parse(localStorage.getItem('lakay_current_user') || 'null');
+            }
+            const user = getCurrentUser();
+            const msg = document.getElementById('message');
+            const favList = document.getElementById('favList');
+            if(!user){
+                msg.textContent = 'Vous devez être connecté pour voir vos favoris.';
+                return;
+            }
+            const favKey = `lakay_favorites_${user.email}`;
+            const favs = JSON.parse(localStorage.getItem(favKey) || '[]');
+            if(!favs || favs.length === 0){
+                msg.textContent = 'Vous n\'avez encore aucun favori.';
+                return;
+            }
+            // load seller products
+            const sellerProducts = JSON.parse(localStorage.getItem('lakay_products') || '[]');
+
+            favs.forEach(item => {
+                // item can be either an id (legacy) or an object {id,title,price,image,sellerName}
+                const id = (typeof item === 'string') ? item : (item.id || '');
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-xl border border-slate-200 p-4 flex gap-3 items-center';
+                // Try to render using stored metadata first
+                if(typeof item === 'object' && item.id){
+                    const p = item;
+                    card.innerHTML = `
+                        <img loading="lazy" src="${p.image || 'https://via.placeholder.com/120x90?text=Image'}" onerror="this.src='https://via.placeholder.com/120x90?text=Image'" class="w-28 h-20 object-cover rounded-md">
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-medium text-slate-900">${p.title || 'Produit'}</h3>
+                                <span class="text-blue-600 font-semibold">${p.price || ''} ${p.price ? 'HTG' : ''}</span>
+                            </div>
+                            <p class="text-xs text-slate-500">${p.sellerName || ''}</p>
+                            <div class="mt-2">
+                                <a href="product-detail.html?id=${p.id}" class="text-sm text-slate-700 hover:text-blue-600">Voir</a>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    const p = sellerProducts.find(x=> x.id === id);
+                    if(p){
+                        card.innerHTML = `
+                            <img loading="lazy" src="${p.image}" onerror="this.src='https://via.placeholder.com/120x90?text=Image'" class="w-28 h-20 object-cover rounded-md">
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="font-medium text-slate-900">${p.title}</h3>
+                                    <span class="text-blue-600 font-semibold">${p.price} HTG</span>
+                                </div>
+                                <p class="text-xs text-slate-500">${p.sellerName}</p>
+                                <div class="mt-2">
+                                    <a href="product-detail.html?id=${p.id}" class="text-sm text-slate-700 hover:text-blue-600">Voir</a>
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        card.innerHTML = `
+                            <div class="flex-1">
+                                <h3 class="font-medium text-slate-900">Produit: ${id}</h3>
+                                <p class="text-xs text-slate-500">Détails non disponibles localement.</p>
+                                <div class="mt-2">
+                                    <a href="product-detail.html?id=${id}" class="text-sm text-slate-700 hover:text-blue-600">Voir</a>
+                                </div>
+                            </div>
+                        `;
+                    }
+                }
+                favList.appendChild(card);
+            });
+        })();
+    </script>
+    <script>
+        document.querySelectorAll('img').forEach(img=>{
+            if(img.complete) img.classList.add('show');
+            else img.addEventListener('load',()=>img.classList.add('show'));
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - LakayMarket</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #cbd5e1; }
+    </style>
+</head>
+<body class="bg-[#FAFAFA] text-slate-900 min-h-screen flex flex-col">
+    <nav class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-200/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-6">
+            <a href="index.html" class="flex items-center gap-2 flex-shrink-0">
+                <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white font-semibold text-sm">LM</div>
+                <span class="text-xl font-semibold hidden sm:block">LakayMarket</span>
+            </a>
+            <div class="flex items-center gap-2 sm:gap-4 flex-shrink-0">
+                <a href="index.html" class="text-sm text-slate-600 hover:text-slate-900">Catalogue</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-1 w-full">
+        <div id="adminLogin" class="max-w-md mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <h1 class="text-3xl font-bold mb-4">Accès Administrateur</h1>
+            <p class="mb-6 text-slate-700">Entrez le code d'accès pour consulter les comptes vendeurs.</p>
+            <form id="loginForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-2">Code</label>
+                    <input type="password" id="adminCode" required class="w-full border border-slate-200 rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10">
+                </div>
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition-colors">Valider</button>
+            </form>
+        </div>
+
+        <div id="adminPanel" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <h2 class="text-2xl font-bold mb-4">Liste des vendeurs</h2>
+
+            <!-- Filters -->
+            <div class="mb-6 flex gap-4 items-center">
+                <div>
+                    <label class="text-sm text-slate-600">Filtrer par région</label>
+                    <select id="filterRegion" class="ml-2 border rounded px-3 py-2">
+                        <option value="all">Toutes</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="text-sm text-slate-600">Rechercher</label>
+                    <input id="searchName" type="text" placeholder="Nom du vendeur..." class="ml-2 border rounded px-3 py-2">
+                </div>
+                <div>
+                    <label class="text-sm text-slate-600">Filtrer par catégorie</label>
+                    <select id="filterCategory" class="ml-2 border rounded px-3 py-2">
+                        <option value="all">Toutes</option>
+                        <option value="artisanat">Artisanat</option>
+                        <option value="vetements">Vêtements</option>
+                        <option value="agricole">Agricole</option>
+                        <option value="electronique">Électronique</option>
+                    </select>
+                </div>
+                <div>
+                    <button id="clearFilters" class="ml-2 bg-slate-100 px-3 py-2 rounded">Réinitialiser</button>
+                </div>
+                <div>
+                    <button id="exportCsv" class="ml-2 bg-green-600 text-white px-3 py-2 rounded">Exporter CSV</button>
+                </div>
+            </div>
+
+            <table class="w-full table-auto border-collapse">
+                <thead>
+                    <tr class="bg-slate-100 text-left">
+                        <th class="px-4 py-2">Nom</th>
+                        <th class="px-4 py-2">Région</th>
+                        <th class="px-4 py-2">Catégorie</th>
+                        <th class="px-4 py-2">Produits</th>
+                        <th class="px-4 py-2">Bannissement / Raison</th>
+                        <th class="px-4 py-2">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="sellersTable" class="divide-y divide-slate-200">
+                    <!-- rows inserted by script -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer class="border-t border-slate-200 bg-white mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2">
+                <div class="w-6 h-6 rounded bg-slate-800 flex items-center justify-center text-white font-semibold tracking-tighter text-xs">LM</div>
+                <span class="text-sm font-medium text-slate-900 tracking-tight">LakayMarket © 2024</span>
+            </div>
+            <div class="flex gap-6 text-sm text-slate-500 font-medium">
+                <a href="a-propos.html" class="hover:text-slate-900 transition-colors">À propos</a>
+                <a href="conditions.html" class="hover:text-slate-900 transition-colors">Conditions d'utilisation</a>
+                <a href="devenir-artisan.html" class="hover:text-slate-900 transition-colors">Devenir Artisan</a>
+                <a href="contact.html" class="hover:text-slate-900 transition-colors">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const ADMIN_CODE = 'admin123'; // simple access code
+        document.getElementById('loginForm').addEventListener('submit', (e)=>{
+            e.preventDefault();
+            const val = document.getElementById('adminCode').value;
+            if(val === ADMIN_CODE){
+                document.getElementById('adminLogin').classList.add('hidden');
+                document.getElementById('adminPanel').classList.remove('hidden');
+                populateSellers();
+            } else {
+                alert('Code incorrect');
+            }
+        });
+
+        function populateSellers(){
+            const sellers = JSON.parse(localStorage.getItem('lakay_sellers') || '[]');
+            const products = JSON.parse(localStorage.getItem('lakay_products') || '[]');
+            const tbody = document.getElementById('sellersTable');
+            const regionSelect = document.getElementById('filterRegion');
+            const categorySelect = document.getElementById('filterCategory');
+            const searchInput = document.getElementById('searchName');
+            const searchTerm = (searchInput && searchInput.value || '').toLowerCase().trim();
+
+            // populate region select with unique regions
+            const regions = Array.from(new Set(sellers.map(s=>s.region).filter(Boolean)));
+            // clear existing options except 'all'
+            regionSelect.innerHTML = '<option value="all">Toutes</option>' + regions.map(r=>`<option value="${r}">${r}</option>`).join('');
+
+            const regionFilter = regionSelect.value || 'all';
+            const categoryFilter = categorySelect.value || 'all';
+
+            tbody.innerHTML = '';
+            sellers.forEach(s=>{
+                if(regionFilter !== 'all' && (s.region || '').toLowerCase() !== regionFilter.toLowerCase()) return;
+                if(categoryFilter !== 'all' && (s.category || '').toLowerCase() !== categoryFilter.toLowerCase()) return;
+                if(searchTerm && !(s.name || '').toLowerCase().includes(searchTerm)) return;
+
+                const count = products.filter(p=>p.sellerId === s.id).length;
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="px-4 py-2">${s.name} ${s.banned ? '<span class="text-xs text-red-600 ml-2' + '(BANNI)</span>' : ''}</td>
+                    <td class="px-4 py-2">${s.region || ''}</td>
+                    <td class="px-4 py-2">${s.category || ''}</td>
+                    <td class="px-4 py-2">${count}</td>
+                    <td class="px-4 py-2">${s.banReason ? '<span class="text-xs text-slate-600">' + (s.banReason) + '</span>' : ''}</td>
+                    <td class="px-4 py-2">
+                        <button class="mr-2 px-2 py-1 bg-red-600 text-white rounded text-sm" onclick="deleteSeller('${s.id}')">Supprimer</button>
+                        <button class="px-2 py-1 bg-amber-500 text-white rounded text-sm" onclick="toggleBan('${s.id}')">${s.banned ? 'Débannir' : 'Bannir'}</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        document.getElementById('filterRegion').addEventListener('change', populateSellers);
+        document.getElementById('filterCategory').addEventListener('change', populateSellers);
+        document.getElementById('clearFilters').addEventListener('click', ()=>{ document.getElementById('filterRegion').value='all'; document.getElementById('filterCategory').value='all'; document.getElementById('searchName').value=''; populateSellers(); });
+        document.getElementById('searchName').addEventListener('input', populateSellers);
+        document.getElementById('exportCsv').addEventListener('click', ()=>{
+            const sellers = JSON.parse(localStorage.getItem('lakay_sellers') || '[]');
+            const products = JSON.parse(localStorage.getItem('lakay_products') || '[]');
+            const rows = [['id','name','email','region','category','banned','banReason','productCount']];
+            sellers.forEach(s=>{
+                const count = products.filter(p=>p.sellerId === s.id).length;
+                rows.push([s.id, s.name || '', s.email || '', s.region || '', s.category || '', s.banned ? 'true' : 'false', s.banReason || '', String(count)]);
+            });
+            const csv = rows.map(r=> r.map(c=> '"'+String(c).replace(/"/g,'""')+'"').join(',')).join('\n');
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a'); a.href = url; a.download = 'sellers_export.csv'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+        });
+
+        function deleteSeller(id){
+            if(!confirm('Supprimer ce vendeur et tous ses produits ?')) return;
+            let sellers = JSON.parse(localStorage.getItem('lakay_sellers') || '[]');
+            sellers = sellers.filter(s=>s.id !== id);
+            localStorage.setItem('lakay_sellers', JSON.stringify(sellers));
+
+            let products = JSON.parse(localStorage.getItem('lakay_products') || '[]');
+            products = products.filter(p=>p.sellerId !== id);
+            localStorage.setItem('lakay_products', JSON.stringify(products));
+
+            populateSellers();
+            alert('Vendeur supprimé');
+        }
+
+        function toggleBan(id){
+            let sellers = JSON.parse(localStorage.getItem('lakay_sellers') || '[]');
+            const idx = sellers.findIndex(s=>String(s.id) === String(id));
+            if(idx === -1) return;
+            if(!sellers[idx].banned){
+                const reason = prompt('Raison du bannissement (visible dans l\'export):', '') || '';
+                sellers[idx].banned = true;
+                sellers[idx].banReason = reason;
+            } else {
+                sellers[idx].banned = false;
+                // keep the reason for record but mark as unbanned
+            }
+            localStorage.setItem('lakay_sellers', JSON.stringify(sellers));
+            populateSellers();
+        }
+    </script>
+    <script src="chat.js"></script>
+</body>
+</html>

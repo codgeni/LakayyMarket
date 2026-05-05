@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panier - LakayMarket</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="bg-[#FAFAFA] text-slate-900 min-h-screen">
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-200/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-6">
+            <a href="index.html" class="flex items-center gap-2 flex-shrink-0">
+                <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white font-semibold text-sm">LM</div>
+                <span class="text-xl font-semibold hidden sm:block">LakayMarket</span>
+            </a>
+            <div class="flex items-center gap-2 sm:gap-4 flex-shrink-0">
+                <a href="index.html" class="text-sm text-slate-600 hover:text-slate-900">Catalogue</a>
+                <a href="cart.html" class="p-2 text-slate-500 hover:text-blue-600 relative">
+                    <iconify-icon icon="solar:cart-large-2-linear" stroke-width="1.5" class="text-xl"></iconify-icon>
+                    <span id="cartCount" class="absolute -top-2 -right-2 bg-red-500 text-white text-[11px] w-5 h-5 rounded-full flex items-center justify-center">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <h1 class="text-2xl font-semibold mb-6">Votre panier</h1>
+
+        <div id="cartEmpty" class="text-center text-slate-600 py-20">
+            Votre panier est vide.
+        </div>
+
+        <div id="cartContainer" class="hidden">
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 mb-6">
+                <div id="itemsList" class="space-y-4"></div>
+            </div>
+
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div>
+                    <button id="clearCart" class="text-sm text-red-600 hover:underline">Vider le panier</button>
+                </div>
+                <div class="flex items-center gap-6">
+                    <div class="text-sm text-slate-600">Total :</div>
+                    <div id="cartTotal" class="text-2xl font-bold text-slate-900">0 HTG</div>
+                    <button id="checkoutBtn" class="ml-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg">Passer à la caisse</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Payment Modal (reuse for checkout) -->
+    <div id="paymentModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-6 w-80">
+            <h3 class="text-lg font-semibold mb-4">Choisissez un mode de paiement</h3>
+            <button id="moncashBtn" class="w-full mb-2 py-2 bg-yellow-500 text-white rounded flex items-center justify-center gap-3">
+                <img src="https://via.placeholder.com/64x28?text=MonCash" alt="MonCash" class="h-6 object-contain">
+                <span class="sr-only">MonCash</span>
+            </button>
+            <button id="natcashBtn" class="w-full py-2 bg-green-500 text-white rounded flex items-center justify-center gap-3">
+                <img src="https://via.placeholder.com/64x28?text=NatCash" alt="NatCash" class="h-6 object-contain">
+                <span class="sr-only">NatCash</span>
+            </button>
+            <button id="cancelPayment" class="mt-4 text-sm text-slate-500 hover:underline">Annuler</button>
+        </div>
+    </div>
+
+    <script>
+        // Cart utility using localStorage
+        function getCart(){
+            try { return JSON.parse(localStorage.getItem('lakayCart') || '[]'); } catch(e){ return []; }
+        }
+        function saveCart(cart){ localStorage.setItem('lakayCart', JSON.stringify(cart)); updateCartCount(); }
+        function updateCartCount(){ const c=document.getElementById('cartCount'); const cart=getCart(); if(c){ c.textContent = cart.reduce((s,i)=>s+i.quantity,0); }}
+
+        function formatPrice(v){ return v + ' HTG'; }
+
+        function renderCart(){ const cart=getCart(); const container=document.getElementById('itemsList'); const cartContainer=document.getElementById('cartContainer'); const empty=document.getElementById('cartEmpty'); if(!container) return; container.innerHTML=''; if(cart.length===0){ cartContainer.classList.add('hidden'); empty.classList.remove('hidden'); updateCartCount(); return; } empty.classList.add('hidden'); cartContainer.classList.remove('hidden');
+            cart.forEach(item=>{
+                const div=document.createElement('div'); div.className='flex items-center gap-4'; div.innerHTML = `
+                    <img src="${item.image}" alt="${item.title}" class="w-20 h-20 object-cover rounded-lg border">
+                    <div class="flex-1">
+                        <div class="font-medium text-slate-900">${item.title}</div>
+                        <div class="text-sm text-slate-600">${formatPrice(item.price)}</div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button class="px-2 py-1 bg-slate-100 rounded decreaseQty">-</button>
+                        <div class="w-10 text-center">${item.quantity}</div>
+                        <button class="px-2 py-1 bg-slate-100 rounded increaseQty">+</button>
+                        <button class="ml-4 text-sm text-red-600 removeItem">Supprimer</button>
+                    </div>
+                `;
+                // attach handlers
+                const removeBtn = div.querySelector('.removeItem'); const incBtn = div.querySelector('.increaseQty'); const decBtn = div.querySelector('.decreaseQty');
+                removeBtn.addEventListener('click', ()=>{ const newCart = getCart().filter(i=>i.id!==item.id); saveCart(newCart); renderCart(); });
+                incBtn.addEventListener('click', ()=>{ const cart=getCart(); const it=cart.find(i=>i.id===item.id); it.quantity++; saveCart(cart); renderCart(); });
+                decBtn.addEventListener('click', ()=>{ const cart=getCart(); const it=cart.find(i=>i.id===item.id); if(it.quantity>1){ it.quantity--; saveCart(cart); } else { const newCart = cart.filter(i=>i.id!==item.id); saveCart(newCart); } renderCart(); });
+                container.appendChild(div);
+            });
+            const total = cart.reduce((s,i)=> s + (i.price * i.quantity), 0);
+            document.getElementById('cartTotal').textContent = total + ' HTG';
+            updateCartCount();
+        }
+
+        document.getElementById('clearCart').addEventListener('click', ()=>{ localStorage.removeItem('lakayCart'); renderCart(); });
+
+        // Checkout flow
+        document.getElementById('checkoutBtn').addEventListener('click', ()=>{ document.getElementById('paymentModal').classList.remove('hidden'); });
+        document.getElementById('cancelPayment').addEventListener('click', ()=>{ document.getElementById('paymentModal').classList.add('hidden'); });
+        document.getElementById('moncashBtn').addEventListener('click', ()=>{ alert('Paiement choisi : MonCash'); localStorage.removeItem('lakayCart'); document.getElementById('paymentModal').classList.add('hidden'); renderCart(); });
+        document.getElementById('natcashBtn').addEventListener('click', ()=>{ alert('Paiement choisi : NatCash'); localStorage.removeItem('lakayCart'); document.getElementById('paymentModal').classList.add('hidden'); renderCart(); });
+
+        // Initialize
+        updateCartCount(); renderCart();
+    </script>
+
+    <!-- Chat Overlay (Floating & Active Mockup) -->
+    <div id="chatContainer" class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-4">
+        
+        <!-- Active Chat Window - Hidden by default -->
+        <div id="chatWindow" class="hidden w-[320px] bg-white rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-200 overflow-hidden flex flex-col h-[400px] transform origin-bottom-right transition-all duration-300 opacity-100">
+            <!-- Header -->
+            <div class="p-3 border-b border-slate-100 bg-slate-50/80 flex items-center justify-between">
+                <h4 class="text-sm font-semibold text-slate-900">Messages</h4>
+                <div class="flex gap-1">
+                    <button id="minimizeBtn" class="p-1.5 text-slate-400 hover:text-slate-600 transition-colors rounded-md hover:bg-slate-200/50" title="Minimiser">
+                        <iconify-icon icon="solar:minus-linear" stroke-width="1.5" class="text-lg"></iconify-icon>
+                    </button>
+                    <button id="closeBtn" class="p-1.5 text-slate-400 hover:text-red-500 transition-colors rounded-md hover:bg-slate-200/50" title="Fermer">
+                        <iconify-icon icon="solar:close-circle-linear" stroke-width="1.5" class="text-lg"></iconify-icon>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Messages Area (Content dynamically loaded) -->
+            <div id="messagesContainer" class="flex-1 p-4 overflow-y-auto space-y-4 bg-white">
+                <!-- Content will be inserted by chat.js -->
+            </div>
+            
+            <!-- Input Area -->
+            <div class="p-3 border-t border-slate-100 bg-white">
+                <div class="relative flex items-center gap-2">
+                    <input id="messageInput" type="text" placeholder="Votre message..." class="flex-1 bg-slate-50 border border-slate-200 rounded-full py-2.5 pl-4 pr-4 text-sm focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all placeholder:text-slate-400">
+                    <button id="sendBtn" class="w-9 h-9 rounded-full bg-blue-600 text-white flex items-center justify-center hover:bg-blue-700 transition-colors shadow-sm flex-shrink-0">
+                        <iconify-icon icon="solar:plain-2-linear" stroke-width="1.5" class="text-sm"></iconify-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating Chat Toggle Button - Visible by default -->
+        <button id="chatToggleBtn" class="w-14 h-14 bg-slate-900 hover:bg-slate-800 text-white rounded-full shadow-lg shadow-slate-200 flex items-center justify-center transition-transform hover:scale-105 border border-slate-700 animate-bounce">
+            <iconify-icon icon="solar:chat-round-dots-linear" stroke-width="1.5" class="text-2xl"></iconify-icon>
+            <span class="absolute top-0 right-0 w-3.5 h-3.5 bg-red-500 border-2 border-white rounded-full animate-pulse"></span>
+        </button>
+    </div>
+
+    <!-- Load chat module -->
+    <script src="chat.js"></script>
+</html>

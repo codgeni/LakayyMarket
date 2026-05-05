@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>À Propos - LakayMarket</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #cbd5e1; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-[#FAFAFA] text-slate-900 min-h-screen flex flex-col">
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-200/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-6">
+            <a href="index.html" class="flex items-center gap-2 flex-shrink-0">
+                <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white font-semibold text-sm">LM</div>
+                <span class="text-xl font-semibold hidden sm:block">LakayMarket</span>
+            </a>
+            <div class="flex items-center gap-2 sm:gap-4 flex-shrink-0">
+                <a href="index.html" class="text-sm text-slate-600 hover:text-slate-900">Catalogue</a>
+                <a href="cart.html" class="p-2 text-slate-500 hover:text-blue-600 relative group">
+                    <iconify-icon icon="solar:cart-large-2-linear" stroke-width="1.5" class="text-xl group-hover:scale-105 transition-transform"></iconify-icon>
+                    <span id="cartCount" class="absolute -top-2 -right-2 bg-red-500 text-white text-[11px] w-5 h-5 rounded-full flex items-center justify-center">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-1 w-full">
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">À Propos de LakayMarket</h1>
+                <p class="text-xl text-blue-100">Découvrez notre mission et notre vision</p>
+            </div>
+        </section>
+
+        <!-- Content -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <!-- Mission Section -->
+            <div class="mb-16">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h2 class="text-3xl font-bold text-slate-900 mb-4">Notre Mission</h2>
+                        <p class="text-slate-700 text-lg leading-relaxed mb-4">
+                            LakayMarket est une plateforme de commerce électronique conçue pour soutenir et promouvoir les artisans, producteurs locaux et entrepreneurs haïtiens. Notre mission est de créer un marché numérique équitable où les créateurs peuvent vendre directement leurs produits de qualité.
+                        </p>
+                        <p class="text-slate-700 text-lg leading-relaxed">
+                            Nous croyons en la valorisation de l'artisanat traditionnel, des produits locaux authentiques et de la culture haïtienne dans un environnement d'affaires moderne et accessible.
+                        </p>
+                    </div>
+                    <div class="bg-blue-50 rounded-2xl p-8">
+                        <iconify-icon icon="solar:target-linear" class="text-5xl text-blue-600 mb-4"></iconify-icon>
+                        <h3 class="text-xl font-semibold text-slate-900 mb-2">Objectif Principal</h3>
+                        <p class="text-slate-700">
+                            Créer une communauté de commerce équitable où les vendeurs locaux prospèrent et les acheteurs trouvent des produits authentiques et de qualité.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Values Section -->
+            <div class="mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">Nos Valeurs</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white border border-slate-200 rounded-xl p-8">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                            <iconify-icon icon="solar:heart-linear" class="text-2xl text-blue-600"></iconify-icon>
+                        </div>
+                        <h3 class="text-xl font-semibold text-slate-900 mb-3">Authenticité</h3>
+                        <p class="text-slate-700">
+                            Nous nous engageons à promouvoir des produits authentiques créés avec passion par nos artisans locaux.
+                        </p>
+                    </div>
+                    <div class="bg-white border border-slate-200 rounded-xl p-8">
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                            <iconify-icon icon="solar:leaf-linear" class="text-2xl text-green-600"></iconify-icon>
+                        </div>
+                        <h3 class="text-xl font-semibold text-slate-900 mb-3">Durabilité</h3>
+                        <p class="text-slate-700">
+                            Nous soutenons les pratiques durables et le commerce équitable qui bénéficient à nos artisans et à la communauté.
+                        </p>
+                    </div>
+                    <div class="bg-white border border-slate-200 rounded-xl p-8">
+                        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                            <iconify-icon icon="solar:handshake-linear" class="text-2xl text-purple-600"></iconify-icon>
+                        </div>
+                        <h3 class="text-xl font-semibold text-slate-900 mb-3">Engagement</h3>
+                        <p class="text-slate-700">
+                            Nous nous engageons à fournir un service excellent et une plateforme fiable pour tous nos utilisateurs.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistics Section -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-8 mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">Nos Chiffres</h2>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="text-center">
+                        <p class="text-4xl font-bold text-blue-600 mb-2">240+</p>
+                        <p class="text-slate-700">Produits</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-4xl font-bold text-blue-600 mb-2">50+</p>
+                        <p class="text-slate-700">Artisans</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-4xl font-bold text-blue-600 mb-2">1000+</p>
+                        <p class="text-slate-700">Clients</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-4xl font-bold text-blue-600 mb-2">4</p>
+                        <p class="text-slate-700">Régions</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Section -->
+            <div>
+                <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">Notre Équipe</h2>
+                <p class="text-center text-slate-700 text-lg max-w-2xl mx-auto">
+                    LakayMarket a été créée par une équipe passionnée d'entrepreneurs haïtiens dédiés à soutenir la croissance économique locale et à promouvoir l'excellence dans l'artisanat.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200 bg-white mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2">
+                <div class="w-6 h-6 rounded bg-slate-800 flex items-center justify-center text-white font-semibold tracking-tighter text-xs">LM</div>
+                <span class="text-sm font-medium text-slate-900 tracking-tight">LakayMarket © 2024</span>
+            </div>
+            <div class="flex gap-6 text-sm text-slate-500 font-medium">
+                <a href="a-propos.html" class="hover:text-slate-900 transition-colors">À propos</a>
+                <a href="conditions.html" class="hover:text-slate-900 transition-colors">Conditions d'utilisation</a>
+                <a href="devenir-artisan.html" class="hover:text-slate-900 transition-colors">Devenir Artisan</a>
+                <a href="contact.html" class="hover:text-slate-900 transition-colors">Contact</a>
+            </div>
+            <div class="mt-4 flex items-center gap-4">
+                <span class="text-sm font-medium">Modes de paiement :</span>
+                <div class="flex items-center gap-3">
+                    <img src="https://via.placeholder.com/100x28?text=MonCash" alt="MonCash" class="h-7 object-contain">
+                    <img src="https://via.placeholder.com/100x28?text=NatCash" alt="NatCash" class="h-7 object-contain">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chat Module -->
+    <div id="chatContainer" class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-4">
+        <div id="chatWindow" class="hidden w-[320px] bg-white rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-200 overflow-hidden flex flex-col h-[400px] transform origin-bottom-right transition-all duration-300 opacity-100">
+            <div class="p-3 border-b border-slate-100 bg-slate-50/80 flex items-center justify-between">
+                <h4 class="text-sm font-semibold text-slate-900">Messages</h4>
+                <div class="flex gap-1">
+                    <button id="minimizeBtn" class="p-1.5 text-slate-400 hover:text-slate-600 transition-colors rounded-md hover:bg-slate-200/50" title="Minimiser">
+                        <iconify-icon icon="solar:minus-linear" stroke-width="1.5" class="text-lg"></iconify-icon>
+                    </button>
+                    <button id="closeBtn" class="p-1.5 text-slate-400 hover:text-red-500 transition-colors rounded-md hover:bg-slate-200/50" title="Fermer">
+                        <iconify-icon icon="solar:close-circle-linear" stroke-width="1.5" class="text-lg"></iconify-icon>
+                    </button>
+                </div>
+            </div>
+            <div id="messagesContainer" class="flex-1 p-4 overflow-y-auto space-y-4 bg-white">
+            </div>
+            <div class="p-3 border-t border-slate-100 bg-white">
+                <div class="relative flex items-center gap-2">
+                    <input id="messageInput" type="text" placeholder="Votre message..." class="flex-1 bg-slate-50 border border-slate-200 rounded-full py-2.5 pl-4 pr-4 text-sm focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all placeholder:text-slate-400">
+                    <button id="sendBtn" class="w-9 h-9 rounded-full bg-blue-600 text-white flex items-center justify-center hover:bg-blue-700 transition-colors shadow-sm flex-shrink-0">
+                        <iconify-icon icon="solar:plain-2-linear" stroke-width="1.5" class="text-sm"></iconify-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <button id="chatToggleBtn" class="w-14 h-14 bg-slate-900 hover:bg-slate-800 text-white rounded-full shadow-lg shadow-slate-200 flex items-center justify-center transition-transform hover:scale-105 border border-slate-700 animate-bounce">
+            <iconify-icon icon="solar:chat-round-dots-linear" stroke-width="1.5" class="text-2xl"></iconify-icon>
+            <span class="absolute top-0 right-0 w-3.5 h-3.5 bg-red-500 border-2 border-white rounded-full animate-pulse"></span>
+        </button>
+    </div>
+
+    <script src="chat.js"></script>
+</body>
+</html>
