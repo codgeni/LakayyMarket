@@ -42,7 +42,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white">S'informer</h3>
+            <h3 className="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white">S&apos;informer</h3>
             <ul className="mt-4 space-y-2 text-sm text-slate-600 dark:text-slate-400">
               <li><Link href="/a-propos" className="hover:text-brand-600 transition-colors">À propos</Link></li>
               <li><Link href="/conditions" className="hover:text-brand-600 transition-colors">Conditions d&apos;utilisation</Link></li>

@@ -11,7 +11,9 @@ import { Plus, Trash2, Package, ShoppingBag, PlusCircle, X, Upload, Loader2, Che
 export default function SellerDashboard() {
   const { user, isLoaded } = useUser();
   const router = useRouter();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [products, setProducts] = useState<any[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [sellerProfile, setSellerProfile] = useState<any>(null);
   const [showAddModal, setShowAddModal] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -40,10 +42,10 @@ export default function SellerDashboard() {
         } else {
           setSellerProfile(data);
           fetchSellerProducts();
-        }
       }
     }
     checkSellerStatus();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, router]);
 
   async function fetchSellerProducts() {

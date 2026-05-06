@@ -7,6 +7,7 @@ import ProductCard from "@/components/product-card";
 import { Search, Filter, MapPin, Tag, ChevronRight, PackageSearch, Sparkles, ShoppingBag, ArrowRight } from "lucide-react";
 
 export default function Home() {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState({
@@ -191,7 +192,7 @@ export default function Home() {
               </div>
               <h3 className="text-2xl font-black text-slate-900">Aucun produit trouvé</h3>
               <p className="mt-4 text-slate-500 font-medium max-w-xs leading-relaxed">
-                Essayez d'ajuster vos filtres ou effectuez une nouvelle recherche.
+                Essayez d&apos;ajuster vos filtres ou effectuez une nouvelle recherche.
               </p>
               <button 
                 onClick={() => setFilters({ category: "all", location: "all", search: "" })}
