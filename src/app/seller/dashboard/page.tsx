@@ -31,7 +31,7 @@ export default function SellerDashboard() {
   useEffect(() => {
     async function checkSellerStatus() {
       if (user) {
-        const { data, error } = await supabase
+        const { data } = await supabase
           .from("profiles")
           .select("*")
           .eq("id", user.id)
@@ -317,7 +317,7 @@ export default function SellerDashboard() {
                   <div className="space-y-2">
                     <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-700 px-1">Sélectionner une Catégorie</label>
                     <select className="input-premium appearance-none cursor-pointer" value={newProduct.category} onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value })}>
-                       <option value="Artisanat">Artisanat d'Art</option>
+                       <option value="Artisanat">Artisanat d&apos;Art</option>
                        <option value="Vêtements">Mode & Design</option>
                        <option value="Agricole">Produits Locaux</option>
                        <option value="Electronique">Technique</option>

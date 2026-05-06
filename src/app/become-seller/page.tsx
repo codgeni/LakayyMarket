@@ -4,8 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 import { supabase } from "@/lib/supabase";
-import { Store, MapPin, ArrowRight, Loader2, Image as ImageIcon, CheckCircle2, ChevronRight } from "lucide-react";
-import Link from "next/link";
+import { Store, Loader2, Image as ImageIcon, CheckCircle2, ChevronRight } from "lucide-react";
 
 export default function BecomeSellerPage() {
   const { user, isLoaded } = useUser();
