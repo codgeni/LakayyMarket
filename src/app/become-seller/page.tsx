@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 import { supabase } from "@/lib/supabase";
-import { Store, MapPin, Briefcase, ArrowRight, Loader2, User, Phone, Image as ImageIcon, CheckCircle2, ChevronRight } from "lucide-react";
+import { Store, MapPin, ArrowRight, Loader2, Image as ImageIcon, CheckCircle2, ChevronRight } from "lucide-react";
 import Link from "next/link";
 
 export default function BecomeSellerPage() {
@@ -125,7 +125,7 @@ export default function BecomeSellerPage() {
               Devenez Artisan Lakay
             </h1>
             <p className="mt-4 text-slate-500 font-medium leading-relaxed">
-              Rejoignez l'élite des artisans haïtiens et vendez vos créations au monde entier.
+              Rejoignez l&apos;élite des artisans haïtiens et vendez vos créations au monde entier.
             </p>
           </div>
 
@@ -171,7 +171,7 @@ export default function BecomeSellerPage() {
                        />
                     </div>
                     <div className="space-y-2">
-                       <label className="text-xs font-bold text-slate-700 uppercase tracking-wider px-1">Nom de l'Entreprise</label>
+                       <label className="text-xs font-bold text-slate-700 uppercase tracking-wider px-1">Nom de l&apos;entreprise</label>
                        <input
                          required
                          type="text"
@@ -244,7 +244,7 @@ export default function BecomeSellerPage() {
                 )}
               </button>
               <p className="mt-8 text-center text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-relaxed px-4">
-                En continuant, vous attestez de l'exactitude des données et acceptez les conditions générales de vente.
+                En continuant, vous attestez de l&apos;exactitude des données et acceptez les conditions générales de vente.
               </p>
             </div>
           </form>

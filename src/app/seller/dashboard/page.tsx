@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import Image from "next/image";
 import Link from "next/link";
-import { Plus, Trash2, LayoutDashboard, Package, ShoppingBag, PlusCircle, X, Upload, Loader2, CheckCircle2, ChevronRight, Store, ArrowUpRight, BarChart3, Settings } from "lucide-react";
+import { Plus, Trash2, Package, ShoppingBag, PlusCircle, X, Upload, Loader2, CheckCircle2, ChevronRight, Store, ArrowUpRight, BarChart3, Settings } from "lucide-react";
 
 export default function SellerDashboard() {
   const { user, isLoaded } = useUser();
@@ -290,13 +290,13 @@ export default function SellerDashboard() {
                   <Plus className="h-8 w-8" />
                </div>
                <h3 className="text-3xl font-black text-slate-900 tracking-tight">Mettre en Vente</h3>
-               <p className="text-slate-500 font-medium mt-2">Partagez votre chef-d'œuvre avec la communauté Lakay.</p>
+               <p className="text-slate-500 font-medium mt-2">Partagez votre chef-d&apos;œuvre avec la communauté Lakay.</p>
             </div>
 
             <form onSubmit={handleAddProduct} className="space-y-8">
                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-700 px-1">Nom de l'article</label>
+                     <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-700 px-1">Nom de l&apos;article</label>
                     <input required type="text" placeholder="Ex: Chapeau de paille fin" className="input-premium" value={newProduct.name} onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })} />
                   </div>
                   <div className="space-y-2">

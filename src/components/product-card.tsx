@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { MapPin, Heart, ShoppingCart, ChevronRight, CheckCircle2, Info } from "lucide-react";
+import { MapPin, Heart, ShoppingCart, Info } from "lucide-react";
 import { useCart } from "@/context/cart-context";
 import { useUser } from "@clerk/nextjs";
 import { supabase } from "@/lib/supabase";

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useCart } from "@/context/cart-context";
 import { UserButton, SignInButton, SignUpButton, Show } from "@clerk/nextjs";
-import { ShoppingCart, Heart, Search, Bell, MapPin, User, Menu } from "lucide-react";
+import { ShoppingCart, Heart, Search, User, Menu } from "lucide-react";
 
 export function Navbar() {
   const { totalItems } = useCart();
@@ -56,7 +56,7 @@ export function Navbar() {
                 </SignInButton>
                 <SignUpButton mode="modal">
                   <button className="rounded-full bg-slate-900 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-slate-900/10 hover:bg-slate-800 hover:scale-105 active:scale-95 dark:bg-slate-100 dark:text-slate-900 page-transition">
-                    S'inscrire
+                    S&apos;inscrire
                   </button>
                 </SignUpButton>
               </div>

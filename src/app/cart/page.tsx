@@ -171,7 +171,7 @@ export default function CartPage() {
             </div>
 
             <p className="mt-8 text-center text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">
-              Soutenez l'industrie locale
+              Soutenez l&apos;industrie locale
             </p>
           </div>
         </div>

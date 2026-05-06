@@ -5,7 +5,6 @@ import Image from "next/image";
 import { supabase } from "@/lib/supabase";
 import ProductCard from "@/components/product-card";
 import { Search, Filter, MapPin, Tag, ChevronRight, PackageSearch, Sparkles, ShoppingBag, ArrowRight } from "lucide-react";
-import Link from "next/link";
 
 export default function Home() {
   const [products, setProducts] = useState<any[]>([]);
@@ -66,7 +65,7 @@ export default function Home() {
           <div className="relative z-20 flex h-full flex-col items-center justify-center text-center px-6 md:px-20">
             <div className="mb-4 rounded-full border border-white/20 bg-white/10 px-6 py-1.5 backdrop-blur-md">
               <span className="text-[10px] font-black text-white uppercase tracking-[0.2em]">
-                Découvrez l'authenticité
+                Découvrez l&apos;authenticité
               </span>
             </div>
             
@@ -75,7 +74,7 @@ export default function Home() {
             </h1>
             
             <p className="max-w-2xl text-base font-medium text-slate-200 leading-relaxed">
-              Votre marché en ligne pour soutenir l'artisanat, les producteurs locaux et découvrir le meilleur de notre culture, directement de chez vous.
+              Votre marché en ligne pour soutenir l&apos;artisanat, les producteurs locaux et découvrir le meilleur de notre culture, directement de chez vous.
             </p>
           </div>
         </div>
@@ -135,7 +134,7 @@ export default function Home() {
                         : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
                     }`}
                   >
-                    {loc === "all" ? "Toute l'île" : loc}
+                    {loc === "all" ? "Toute l&apos;île" : loc}
                     {filters.location === loc && <ChevronRight className="h-4 w-4 opacity-50" />}
                   </button>
                 ))}

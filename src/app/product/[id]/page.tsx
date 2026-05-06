@@ -7,9 +7,9 @@ import { supabase } from "@/lib/supabase";
 import { useCart } from "@/context/cart-context";
 import { useUser } from "@clerk/nextjs";
 import { 
-  MapPin, ShoppingCart, Heart, Share2, ShieldCheck, ArrowLeft, 
+  MapPin, ShoppingCart, Heart, ShieldCheck, ArrowLeft, 
   Loader2, Star, CheckCircle2, MessageSquare, Plus, Minus,
-  Truck, RotateCcw, Send, Settings, User
+  Truck, RotateCcw, User
 } from "lucide-react";
 
 export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
@@ -338,7 +338,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
               <div className="max-w-md">
                  <h2 className="text-3xl font-black text-slate-900 tracking-tight">Ce que nos clients disent</h2>
                  <p className="mt-4 text-slate-500 font-medium leading-relaxed">
-                   Seuls les clients ayant acheté ce produit peuvent laisser un avis. Nous garantissons l'authenticité de chaque retour.
+                    Seuls les clients ayant acheté ce produit peuvent laisser un avis. Nous garantissons l&apos;authenticité de chaque retour.
                  </p>
                  <div className="mt-8 flex items-center gap-4">
                     <div className="text-5xl font-black text-slate-900">{averageRating}</div>
@@ -419,7 +419,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                       </div>
                    </div>
                    <p className="flex-1 text-sm font-medium text-slate-600 leading-relaxed italic">
-                      "{rev.comment}"
+                    &quot;{rev.comment}&quot;
                    </p>
                    <div className="mt-8 pt-4 border-t border-slate-50 flex items-center justify-between">
                       <span className="text-[10px] font-bold text-slate-300 uppercase tracking-widest">
@@ -436,7 +436,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                       <Star className="h-8 w-8" />
                    </div>
                    <h4 className="text-lg font-black text-slate-900 tracking-tight">Aucun avis pour le moment</h4>
-                   <p className="text-sm text-slate-400 font-medium">Soyez le premier à partager votre expérience après l'achat !</p>
+                   <p className="text-sm text-slate-400 font-medium">Soyez le premier à partager votre expérience après l&apos;achat !</p>
                 </div>
               )}
            </div>
@@ -450,7 +450,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
               
               {/* Tooltip */}
               <div className="absolute right-20 bg-white px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest text-slate-900 shadow-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
-                Contacter l'Artisan
+                Contacter l&apos;Artisan
               </div>
            </button>
         </div>
