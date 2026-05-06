@@ -42,6 +42,7 @@ export default function SellerDashboard() {
         } else {
           setSellerProfile(data);
           fetchSellerProducts();
+        }
       }
     }
     checkSellerStatus();
